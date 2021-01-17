@@ -3,14 +3,24 @@ const router = express.Router();
 const Workout = require('../models/workout');
 const mongoose = require('mongoose');
 
+router.get('/api/workouts/range', (req, res) => {
+  Workout.find({}, (err, result) => {
+    if (err) {
+      throw err;
+    }
+    res.send(result);
+  });
+});
+
 router.get('/api/workouts', (req, res) => {
-  Workout.find({})
-    .sort({ date: -1 })
-    .then((dbWorkout) => {
-      res.json(dbWorkout);
+  Workout.aggregate([
+    { $addFields: { totalDuration: { $sum: '$exercises.duration' } } }
+  ])
+    .then((Workout) => {
+      res.json(Workout);
     })
     .catch((err) => {
-      res.status(400).json(err);
+      res.json(err);
     });
 });
 
