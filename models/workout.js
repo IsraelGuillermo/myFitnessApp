@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+// Declaring schema for database
 const workoutSchema = new Schema({
   day: { type: Date, default: Date.now },
   exercises: [
