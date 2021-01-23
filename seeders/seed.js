@@ -2,7 +2,7 @@ let mongoose = require('mongoose');
 let db = require('../models/workout.js');
 
 mongoose.connect(
-  ('mongodbsrv: //israelUser:israel123@cluster0.9paxs.mongodb.net/workout?retryWrites=true&w=majority',
+  (process.env.MONGODB_URI || 'mongodb://localhost/workout',
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
