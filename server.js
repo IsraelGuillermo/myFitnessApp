@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
+require('dotenv').config();
 
 const PORT = process.env.PORT || 8080;
 
@@ -10,7 +11,6 @@ app.use(express.json());
 
 app.use(express.static('public'));
 
-require('dotenv').config();
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/workout', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
