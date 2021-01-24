@@ -14,6 +14,7 @@ router.get('/api/workouts/range', (req, res) => {
 });
 // Gets all information for workouts to display information on the main page
 router.get('/api/workouts', (req, res) => {
+  // Here we are adding a field to the data which includes duration 
   Workout.aggregate([
     { $addFields: { totalDuration: { $sum: '$exercises.duration' } } }
   ])
